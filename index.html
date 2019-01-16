@@ -239,13 +239,13 @@ while((o.nodeName.toLowerCase())!='tr')
       <p>Find us at some address at some place or call us at 05050515-122330</p>
       <p><span class="w3-tag">FYI!</span> We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste.</p>
       <p class="w3-xxlarge"><strong>Reserve</strong> a table, ask for today's special or just send us a message:</p>
-      <form >
+      <div >
           <p><input class="w3-input w3-padding-16 w3-border" id="name_" type="text" placeholder="Name" required name="Name"></p>
           <p><input class="w3-input w3-padding-16 w3-border" id="many_" type="number" placeholder="How many people" required name="People"></p>
           <p><input class="w3-input w3-padding-16 w3-border" id="date_" type="datetime-local" placeholder="Date and time" required name="date" value="2017-11-16T20:00"></p>
           <p><input class="w3-input w3-padding-16 w3-border" id="message_" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
           <p><button class="w3-button w3-light-grey w3-block" onclick="gonder_iletisim()">SEND MESSAGE</button></p>
-        </form>
+      </div>
     </div>
   </div>
     </div>
@@ -256,13 +256,13 @@ while((o.nodeName.toLowerCase())!='tr')
 <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge">
     <div class="w3-content">
       
-      <form >
+      <div >
         <p><input class="w3-input w3-padding-16 w3-border" id="name_kurumsal" type="text" placeholder="Name" required name="Name"></p>
-        <p><input class="w3-input w3-padding-16 w3-border" id="exp_" type="text" placeholder="experience" required name="People"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" id="exp_kurumsal" type="text" placeholder="experience" required name="People"></p>
         <p><input class="w3-input w3-padding-16 w3-border" id="date_kurumsal" type="datetime-local" placeholder="starting time" required name="date" value="2017-11-16T20:00"></p>
         <p><input class="w3-input w3-padding-16 w3-border" id="message_kurumsal" type="text" placeholder="why we should choose you " required name="Message"></p>
         <p><button class="w3-button w3-light-grey w3-block" onclick="gonder_kurumsal()">SEND MESSAGE</button></p>
-      </form>
+      </div>
     </div>
   </div>
     </div>
@@ -304,7 +304,23 @@ while((o.nodeName.toLowerCase())!='tr')
     });
     alert("gonderildi. teşekkür ederiz");
   }
+  
+  function gonder_kurumsal(){
+    var _name = $("#name_kurumsal").val();
+    var _exp = $("#exp_kurumsal").val();
+    var _date = $("#date_kurumsal").val();
+    var _message = $("#message_kurumsal").val();
 
+    var result = kurumsal.push({
+      name:_name,
+      exp:_exp,
+      date:_date,
+      message:_message
+      
+
+    });
+    alert("gonderildi. teşekkür ederiz");
+  }
 
 
 </script>
