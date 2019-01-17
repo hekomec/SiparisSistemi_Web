@@ -22,6 +22,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 <script>
 var toplam = 0;
 var index = 1;
+var siparis = "";
 
 function ekle(isim,fiyat){
 toplam += parseInt(fiyat);
@@ -34,15 +35,22 @@ toplam += parseInt(fiyat);
   var cell3 = row.insertCell(2);
   cell1.innerHTML = "<h1>"+isim+"</h1>";
   cell2.innerHTML = "<h1>"+fiyat+"</h1>";
-  cell3.innerHTML = '<button id="a'+index+' class="w3-button w3-red w3-padding-large" onclick="cikar(this,'+fiyat+')">Çıkar</button>';
+  cell3.innerHTML = '<button id="a'+index+' class="w3-button w3-red w3-padding-large" onclick="cikar(this,'+fiyat+',\''+isim+'\')">Çıkar</button>';
+
+  siparis += "\n "+isim+"  ";
   index ++;
   console.log(index);
+  console.log(siparis);
 }
 
-function cikar(o,fiyat){
+function cikar(o,fiyat,isim){
   toplam -= parseInt(fiyat);
+siparis=siparis.replace("\n "+isim+"  ", "");
+console.log(siparis);
+console.log("silinecek isim : "+isim);
 
 document.getElementById("form_toplam").innerHTML="<h1>"+toplam+"</h1>";
+
 
 while((o.nodeName.toLowerCase())!='tr')
         o = o.parentNode;
@@ -89,7 +97,7 @@ while((o.nodeName.toLowerCase())!='tr')
       <a href="javascript:void(0)" onclick="openMenu(event, 'Pizza');" id="myLink">
         <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Pizza</div>
       </a>
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Pasta');">
+      <a href="javascript:void(0)" onclick="openMenu(event, 'Pasta', );">
         <div class="w3-col s4 tablink w3-padding-large w3-hover-red">Salads</div>
       </a>
       <a href="javascript:void(0)" onclick="openMenu(event, 'Starter');">
@@ -188,7 +196,7 @@ while((o.nodeName.toLowerCase())!='tr')
   
   </tr>
 <tr>
-  <td> <button id="onay" align="center" class="w3-button w3-green w3-padding-large w3-center">Siparişi Gönder</button></td>
+  <td> <button id="onay" align="center" class="w3-button w3-green w3-padding-large w3-center" onclick="siparis_gonder()">Siparişi Gönder</button></td>
 </tr>
 
 </table>
@@ -283,7 +291,7 @@ while((o.nodeName.toLowerCase())!='tr')
 
   var database = firebase.database();
   var iletisim = database.ref('iletisim');
-  var siparis = database.ref('siparis');
+  var siparisdb = database.ref('siparis');
   var kurumsal = database.ref('kurumsal');
 
 
@@ -318,6 +326,14 @@ while((o.nodeName.toLowerCase())!='tr')
       message:_message
       
 
+    });
+    alert("gonderildi. teşekkür ederiz");
+  }
+
+  function siparis_gonder(){
+    var result = siparisdb.push({
+      order:siparis,
+      total:toplam
     });
     alert("gonderildi. teşekkür ederiz");
   }
